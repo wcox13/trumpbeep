@@ -41,7 +41,15 @@ def main():
 
     while True:
         for user in users:
-            tweet = most_recent_tweet(user)
+            try:
+                tweet = most_recent_tweet(user)
+            except:
+                print 'timeout'
+                api = get_api()
+                users.remove(user)
+                users.append(get_user(api, user.name))
+                sleep(5)
+                continue
 
             # check if the tweet is new
             if tweet.id != tweet_ids[user.name]:
