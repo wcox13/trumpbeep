@@ -1,5 +1,5 @@
 # trumpbeep
-Sound an alarm when new tweets come in from a list of users.
+Sound an alarm when new tweets come in from a list of users. For Mac only.
 
 ## Setup
 1. Open a terminal and make sure you have python and pip installed on your mac by running `sudo easy_install python` and `sudo easy_install pip`.
