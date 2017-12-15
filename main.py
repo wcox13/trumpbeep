@@ -13,14 +13,14 @@ def main():
 
     # get user objects
     usernames = parse_input(sys.argv)
-    users = []
+    users = {}
     if not usernames:
         print 'Usage: python main.py user1 [user2, user3, ...]'
         return
     for username in usernames:
         user = get_user(api, username)
         if user:
-            users.append(user)
+            users[username] = user
         else:
             print "Could not find user \"" + username + "\", skipping..."
 
@@ -31,24 +31,25 @@ def main():
 
     # keep track of most recent tweets
     tweet_ids = {}
-    for user in users:
+    for user in users.values():
         tweet_ids[user.name] = most_recent_tweet(user).id
 
     # print message and start loop
-    msg = 'Tracking ' + ', '.join([user.name for user in users]) + '...'
+    msg = 'Tracking ' + ', '.join(users.keys()) + '...'
     print msg
     print 'Press ctrl-C to quit'
 
     while True:
-        for user in users:
+        for username, user in users.iteritems():
             try:
                 tweet = most_recent_tweet(user)
             except:
-                print 'timeout'
+
+                # restart API in case of timeout
+                print 'Error getting most recent tweet. Retrying...'
                 api = get_api()
-                users.remove(user)
-                users.append(get_user(api, user.name))
-                sleep(5)
+                for username in usernames:
+                    users[username] = get_user(api, username)
                 continue
 
             # check if the tweet is new

@@ -50,4 +50,4 @@ def print_tweet(username, text):
     """
     Print a new tweet message.
     """
-    print 'NEW TWEET from @' + username + ': ' + text
+    print '\nNEW TWEET from ' + username + ': ' + text
