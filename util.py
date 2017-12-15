@@ -1,4 +1,5 @@
 import tweepy
+import os
 from creds import *
 
 def get_api():
@@ -43,7 +44,7 @@ def play_alarm():
     """
     Sound a system alarm.
     """
-    print "ALARM"
+    os.system("afplay ./alarm.mp3 -v 3 -t 8")
 
 def print_tweet(username, text):
     """

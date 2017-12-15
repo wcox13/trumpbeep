@@ -3,7 +3,7 @@ from time import sleep
 import sys
 
 def main():
-    print
+    print "\ninitializing..."
 
     # connect to twitter API
     api = get_api()
@@ -45,8 +45,9 @@ def main():
 
             # check if the tweet is new
             if tweet.id != tweet_ids[user.name]:
-                play_alarm()
                 print_tweet(user.name, tweet.text)
+                play_alarm()
+		tweet_ids[user.name] = tweet.id
 
         sleep(15)
 
