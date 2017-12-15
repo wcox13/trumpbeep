@@ -50,6 +50,7 @@ def main():
                 api = get_api()
                 for username in usernames:
                     users[username] = get_user(api, username)
+                sleep(5)
                 continue
 
             # check if the tweet is new
